@@ -13,37 +13,23 @@
   </header>
   <main>
     <p class="lead">Kérdésed van a beiratkozással kapcsolatban? Írj nekünk!</p>
-    
     <form action="#" method="post">
-      <!-- Név mező -->
-      <div>
-        <label for="nev">Teljes név</label>
-        <input type="text" id="nev" name="nev" placeholder="Teljes név" required>
-      </div>
+      <label for="nev">Teljes név</label>
+      <input type="text" id="nev" name="nev" placeholder="Teljes név" required>
 
-      <!-- E-mail mező (típus javítva) -->
-      <div>
-        <label for="email">E-mail cím</label>
-        <input type="email" id="email" name="email" placeholder="E-mail cím" required>
-      </div>
+      <label for="email">E-mail cím</label>
+      <input type="email" id="email" name="email" placeholder="E-mail cím" required>
 
-      <!-- Legördülő menü -->
-      <div>
-        <label for="tema">Téma</label>
-        <select id="tema" name="tema">
-          <option value="beiratkozas">Beiratkozás</option>
-          <option value="osztondij">Ösztöndíj</option>
-          <option value="egyeb">Egyéb</option>
-        </select>
-      </div>
+      <label for="tema">Téma</label>
+      <select id="tema" name="tema">
+        <option value="beiratkozas">Beiratkozás</option>
+        <option value="osztondij">Ösztöndíj</option>
+        <option value="egyeb">Egyéb</option>
+      </select>
 
-      <!-- Üzenet mező -->
-      <div>
-        <label for="uzenet">Üzenet</label>
-        <textarea id="uzenet" name="uzenet" placeholder="Üzenet" rows="5" required></textarea>
-      </div>
+      <label for="uzenet">Üzenet</label>
+      <textarea id="uzenet" id="uzenet" name="uzenet" placeholder="Üzenet" rows="5"></textarea>
 
-      <!-- Submit gomb (a link helyett) -->
       <button type="submit">Küldés</button>
     </form>
   </main>
