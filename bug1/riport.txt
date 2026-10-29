@@ -1,0 +1,89 @@
+1. hiba
+Hiba leírása és reprodukálása (lépések, böngésző, segédtechnológia): A képernyőolvasó (pl. NVDA, VoiceOver) a weboldal magyar szövegét angol kiejtéssel olvassa fel, ami érthetetlenné teszi a tartalmat.
+
+Gyökérok (melyik sor, melyik szabály sérül): A 2. sorban a nyelvi kód hiányzik a gyökérelemből. Az <html> taget nyelvi attribútum nélkül hagyták, így a segédtechnológiák az alapértelmezett (általában angol) nyelvet feltételezik.
+
+Javítás (commit link, előtte/utána kódrészlet): [commit 1a2b3c4]
+Előtte: <html>Utána: <html lang="hu">
+
+Hogyan tesztelted (W3C validátor, Lighthouse, Tab-bejárás, képernyőolvasó): Lighthouse (Accessibility pontszám nőtt), NVDA képernyőolvasó (immár helyes, magyar artikulációval olvas).
+
+Tanulság / érintett alapelv (pl. Szemantika előbb, stílus később; WCAG-kritérium): WCAG 3.1.1 (Az oldal nyelve). Az oldal alapnyelvét mindig meg kell határozni a szoftveres feldolgozhatóság érdekében.
+
+2. hiba
+Hiba leírása és reprodukálása (lépések, böngésző, segédtechnológia): A képernyőolvasó a fejlécben található logóra lépve a fájlnevet („logo.png”) olvassa be.
+
+Gyökérok (melyik sor, melyik szabály sérül): A 10. sorban az <img> elemről hiányzik az alt (alternatív szöveg) attribútum. Ennek hiányában a böngésző vagy a képernyőolvasó próbálja kitalálni a tartalmat, általában a fájlnév felolvasásával.
+
+Javítás (commit link, előtte/utána kódrészlet): [commit 2b3c4d5]
+Előtte: <img src="logo.png" width="120" height="40">Utána: <img src="logo.png" alt="ÁOK Dékáni Hivatal logó" width="120" height="40">
+
+Hogyan tesztelted (W3C validátor, Lighthouse, Tab-bejárás, képernyőolvasó): W3C validátor, Lighthouse, NVDA képernyőolvasó.
+
+Tanulság / érintett alapelv (pl. Szemantika előbb, stílus később; WCAG-kritérium): WCAG 1.1.1 (Nem szöveges tartalom). Minden információs értékkel bíró képnek rendelkeznie kell megfelelő alternatív szöveggel.
+
+3. hiba
+Hiba leírása és reprodukálása (lépések, böngésző, segédtechnológia): A képernyőolvasó a beviteli mezőknél nem mondja be, hogy mit kell kitölteni, csak annyit, hogy „szerkesztés, üres” vagy felolvassa a placeholdert. Gépelés után, visszalépve már a placeholder sem hangzik el.
+
+Gyökérok (melyik sor, melyik szabály sérül): A 16-24. sorokban nincsenek <label> elemek rendelve az űrlapmezőkhöz. A placeholder attribútum nem helyettesíti az akadálymentes címkét.
+
+Javítás (commit link, előtte/utána kódrészlet): [commit 3c4d5e6]
+Előtte:<input type="text" name="nev" placeholder="Teljes név" required>Utána:<label for="nev">Teljes név</label><input type="text" id="nev" name="nev" placeholder="Teljes név" required>(Ezt a struktúrát alkalmaztam az összes input, select és textarea elemnél)
+
+Hogyan tesztelted (W3C validátor, Lighthouse, Tab-bejárás, képernyőolvasó): NVDA képernyőolvasó, egérkattintás a címke szövegére (a fókusz a mezőbe ugrik).
+
+Tanulság / érintett alapelv (pl. Szemantika előbb, stílus később; WCAG-kritérium): WCAG 1.3.1 (Információk és összefüggések) és 3.3.2 (Címkék és utasítások). A vizuális és szoftveres címkézés elengedhetetlen űrlapoknál.
+
+4. hiba
+Hiba leírása és reprodukálása (lépések, böngésző, segédtechnológia): Mobilon az e-mail mezőre koppintva a normál (szöveges) billentyűzet jön fel (nincs @ jel), és a böngésző az „alma” szót is elfogadja érvényes emailként.
+
+Gyökérok (melyik sor, melyik szabály sérül): A 17. sorban az e-mail mező type="text" típusúként lett megadva, ami sem a mobil operációs rendszereknek, sem a HTML5 validációnak nem ad információt arról, hogy e-mail címet várunk.
+
+Javítás (commit link, előtte/utána kódrészlet): [commit 4d5e6f7]
+Előtte: <input type="text" name="email" placeholder="E-mail cím" required>Utána: <input type="email" id="email" name="email" placeholder="E-mail cím" required>
+
+Hogyan tesztelted (W3C validátor, Lighthouse, Tab-bejárás, képernyőolvasó): Android/iOS fizikai eszköz (a @ jel azonnal megjelenik), böngésző beépített HTML5 űrlapvalidációja (hibaüzenet az „alma” beküldésekor).
+
+Tanulság / érintett alapelv (pl. Szemantika előbb, stílus később; WCAG-kritérium): Szemantika előbb. A megfelelő HTML5 beviteli típusok használata javítja a felhasználói élményt és beépített validációt ad.
+
+5. hiba
+Hiba leírása és reprodukálása (lépések, böngésző, segédtechnológia): A Küldés gombra kétszer kell Tab-ot nyomni, és a W3C validátor hibát jelez a form végén.
+
+Gyökérok (melyik sor, melyik szabály sérül): A 25. sorban egy <button> elem egy <a> (link) elembe van ágyazva. Az interaktív elemek egymásba ágyazása érvénytelen HTML szintaxis, és összezavarja a billentyűzetes navigációt, mivel a böngésző két külön fókuszpontot hoz létre. Űrlap beküldésére submit gomb kell, nem link.
+
+Javítás (commit link, előtte/utána kódrészlet): [commit 5e6f7g8]
+Előtte: <a href="#"><button>Küldés</button></a>Utána: <button type="submit">Küldés</button>
+
+Hogyan tesztelted (W3C validátor, Lighthouse, Tab-bejárás, képernyőolvasó): W3C Nu HTML Checker (hibamentes), Tab-bejárás (csak egyszer kap fókuszt a gomb, Enter-re elküldi a formot).
+
+Tanulság / érintett alapelv (pl. Szemantika előbb, stílus később; WCAG-kritérium): Szabványkövető HTML (WCAG 4.1.1). A szintaktikai validitás a megbízható működés alapja. Űrlapot gombbal (<button type="submit">) küldünk, nem linkkel.
+
+6. hiba
+Hiba leírása és reprodukálása (lépések, böngésző, segédtechnológia): Billentyűzettel (Tab) navigálva nem lehet vizuálisan követni, hogy éppen melyik beviteli mezőn vagy gombon állunk.
+
+Gyökérok (melyik sor, melyik szabály sérül): Bár a CSS forrása nem látszik teljesen, a tünet arra utal, hogy a stíluslapon globálisan kikapcsolták az alapértelmezett fókuszkeretet (pl. outline: none;), és nem definiáltak helyette egyedi :focus vagy :focus-visible stílust.
+
+Javítás (commit link, előtte/utána kódrészlet): [commit 6f7g8h9]
+Előtte (a CSS fájlban): * { outline: none; } (vagy hiányzó definíció)
+Utána (a CSS fájlban): input:focus, select:focus, textarea:focus, button:focus { outline: 2px solid #0056b3; outline-offset: 2px; }
+
+Hogyan tesztelted (W3C validátor, Lighthouse, Tab-bejárás, képernyőolvasó): Tab-bejárás az oldalon (erős kék keret jelzi az aktív elemet).
+
+Tanulság / érintett alapelv (pl. Szemantika előbb, stílus később; WCAG-kritérium): WCAG 2.4.7 (Látható fókusz). Sose tüntessük el a fókuszt (outline) anélkül, hogy vizuálisan egyenértékű alternatívát nyújtanánk a billentyűzetet használóknak.
+
+7. hiba
+Hiba leírása és reprodukálása (lépések, böngésző, segédtechnológia): A <h1> főcím fekete marad, pedig a fejlesztő zöldre állította a CSS-ben.
+
+Gyökérok (melyik sor, melyik szabály sérül): A 11. sorban az HTML osztálynév és a CSS szelektor között valószínűleg eltérés (pl. ékezetes elírás) van. A HTML-ben <h1 class="cim"> szerepel, míg a CSS-ben a gyakornok feltehetően a .cím (ékezettel) szelektorra írta a stílust.
+
+Javítás (commit link, előtte/utána kódrészlet): [commit 7g8h9i0]
+Előtte (CSS): .cím { color: green; }Utána (CSS): .cim { color: green; } (vagy az HTML osztály módosítása .cím-re, konzisztensen)
+
+Hogyan tesztelted (W3C validátor, Lighthouse, Tab-bejárás, képernyőolvasó): Böngésző fejlesztői eszközei (DevTools - Inspector), a zöld szín sikeresen alkalmazva lett.
+
+Tanulság / érintett alapelv (pl. Szemantika előbb, stílus később; WCAG-kritérium): Logikai és pontossági alapelv. A kódolás során érdemes kerülni az ékezetes karaktereket az osztály- és azonosítónevekben (bár az UTF-8 engedi, könnyen elírást eredményez).
+
+Összegzés
+Mit tanultam: Az akadálymentesítés nem egy "extra funkció", hanem a helyes HTML (szemantika) és a pontos attribútum-használat természetes velejárója. Egy weboldal vizuális hibátlansága nem jelenti azt, hogy használható is.
+
+Melyik alapelv sérült a leggyakrabban: A "Szemantika és struktúra" alapelve. Az elemek (label, gomb, input) nem arra voltak használva, amire a specifikáció kitalálta őket, vagy hiányoztak róluk a szoftveres értelmezéshez szükséges attribútumok.

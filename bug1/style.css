@@ -1,0 +1,13 @@
+/* Főcím színének javítása (ékezet nélküli szelektorral) */
+.cim {
+  color: green;
+}
+
+/* Akadálymentes, látható fókuszkeret a billentyűzetes navigációhoz */
+input:focus, 
+select:focus, 
+textarea:focus, 
+button:focus {
+  outline: 2px solid #0056b3; /* Jól látható kék keret */
+  outline-offset: 2px;
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kapcsolat – ÁOK Dékáni Hivatal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="ÁOK Dékáni Hivatal logó" width="120" height="40">
+    <h1 class="cim">Kapcsolatfelvétel</h1>
+  </header>
+  <main>
+    <p class="lead">Kérdésed van a beiratkozással kapcsolatban? Írj nekünk!</p>
+    
+    <form action="#" method="post">
+      <!-- Név mező -->
+      <div>
+        <label for="nev">Teljes név</label>
+        <input type="text" id="nev" name="nev" placeholder="Teljes név" required>
+      </div>
+
+      <!-- E-mail mező (típus javítva) -->
+      <div>
+        <label for="email">E-mail cím</label>
+        <input type="email" id="email" name="email" placeholder="E-mail cím" required>
+      </div>
+
+      <!-- Legördülő menü -->
+      <div>
+        <label for="tema">Téma</label>
+        <select id="tema" name="tema">
+          <option value="beiratkozas">Beiratkozás</option>
+          <option value="osztondij">Ösztöndíj</option>
+          <option value="egyeb">Egyéb</option>
+        </select>
+      </div>
+
+      <!-- Üzenet mező -->
+      <div>
+        <label for="uzenet">Üzenet</label>
+        <textarea id="uzenet" name="uzenet" placeholder="Üzenet" rows="5" required></textarea>
+      </div>
+
+      <!-- Submit gomb (a link helyett) -->
+      <button type="submit">Küldés</button>
+    </form>
+  </main>
+  <footer>
+    <p class="kicsi">© 2026 UMFST – Minden jog fenntartva</p>
+  </footer>
+</body>
+</html>
